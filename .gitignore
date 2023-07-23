@@ -1,0 +1,23 @@
+# dependencies
+/frontent/vaclog/node_modules
+/frontent/vaclog/.pnp
+/frontent/vaclog/.pnp.js
+
+# testing
+/frontent/vaclog/coverage
+
+# production
+/frontent/vaclog/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+/frontent/vaclog/npm-debug.log*
+/frontent/vaclog/yarn-debug.log*
+/frontent/vaclog/yarn-error.log*
+
+/.idea

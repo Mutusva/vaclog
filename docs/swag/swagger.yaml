@@ -1,0 +1,145 @@
+basePath: /
+definitions:
+  Codenotary_internal_model.ErrorResponse:
+    properties:
+      code:
+        type: integer
+      error:
+        type: string
+    type: object
+  Codenotary_internal_model.RecordCreateResponse:
+    properties:
+      documentId:
+        type: string
+      transactionId:
+        type: string
+    type: object
+  Codenotary_internal_model.VacRecordModel:
+    properties:
+      age:
+        type: integer
+      animal_id:
+        type: string
+      date_administered:
+        type: string
+      document_id:
+        type: string
+      notes:
+        type: string
+      species:
+        type: string
+      vaccine_name:
+        type: string
+    type: object
+  internal_api.VacRecordResponse:
+    properties:
+      records:
+        items:
+          $ref: '#/definitions/Codenotary_internal_model.VacRecordModel'
+        type: array
+    type: object
+host: localhost:3000
+info:
+  contact: {}
+  description: This API provides functionality to record vaccination history for farm
+    animal
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Vaccination log for animals
+  version: "2.0"
+paths:
+  /records/:
+    get:
+      consumes:
+      - application/json
+      description: all vaccination records for farm animals
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_api.VacRecordResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Codenotary_internal_model.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Codenotary_internal_model.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Codenotary_internal_model.ErrorResponse'
+      summary: all vaccination records for farm animals
+      tags:
+      - vac_records
+    put:
+      consumes:
+      - application/json
+      description: creates a vaccination record for an animal
+      parameters:
+      - description: The JSON for a vaclog
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/Codenotary_internal_model.VacRecordModel'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Codenotary_internal_model.RecordCreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Codenotary_internal_model.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Codenotary_internal_model.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Codenotary_internal_model.ErrorResponse'
+      summary: creates a vaccination record for an animal
+      tags:
+      - vac_records
+  /records/:documentID:
+    get:
+      consumes:
+      - application/json
+      description: search for a vaccination record for an animal and returns all the
+        revision
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Codenotary_internal_model.VacRecordModel'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Codenotary_internal_model.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/Codenotary_internal_model.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Codenotary_internal_model.ErrorResponse'
+      summary: search for a vaccination record
+      tags:
+      - vac_records
+schemes:
+- http
+swagger: "2.0"

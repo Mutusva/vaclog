@@ -1,0 +1,15 @@
+https://vault.immudb.io/ledger/default/collection/vaclog
+
+// Create a collection
+curl -kX 'PUT' \
+  'https://vault.immudb.io/ics/api/v1/ledger/default/collection/default' \
+  -H 'accept: */*' \
+  -H "X-API-Key: "   \
+  -H 'Content-Type: application/json' \
+  -d '{"fields":[{"name":"id","type":"INTEGER"}],"idFieldName":"_id","indexes":[{"fields":["id"],"isUnique":true}]}'
+
+
+Improvements:
+- deployments pipeline
+- security
+- More tests
